@@ -1,30 +1,30 @@
--- Drop tables if they exist to avoid duplication errors
-DROP TABLE IF EXISTS order_details;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS books;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS authors;
+-- Drop tables if they exist
+DROP TABLE IF EXISTS Order_Details;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Books;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Authors;
 
--- Create the authors table
-CREATE TABLE authors (
+-- Create the Authors table
+CREATE TABLE Authors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     author_name VARCHAR(200) NOT NULL,
     date_of_birth DATE
 );
 
--- Create the books table
-CREATE TABLE books (
+-- Create the Books table
+CREATE TABLE Books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     author_id INT,
     published_year INT,
     price DECIMAL(10, 2),
     stock_quantity INT,
-    FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
+    FOREIGN KEY (author_id) REFERENCES Authors(id) ON DELETE CASCADE
 );
 
--- Create the customers table
-CREATE TABLE customers (
+-- Create the Customers table
+CREATE TABLE Customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -33,22 +33,22 @@ CREATE TABLE customers (
     address VARCHAR(255)
 );
 
--- Create the orders table
-CREATE TABLE orders (
+-- Create the Orders table
+CREATE TABLE Orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
     order_date DATE NOT NULL,
     total_amount DECIMAL(10, 2),
-    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE
 );
 
--- Create the order_details table
-CREATE TABLE order_details (
+-- Create the Order_Details table
+CREATE TABLE Order_Details (
     order_id INT,
     book_id INT,
     quantity INT,
     price DECIMAL(10, 2),
     PRIMARY KEY (order_id, book_id),
-    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+    FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE
 );
