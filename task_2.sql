@@ -14,7 +14,7 @@ CREATE TABLE Authors (
 
 -- Create the Books table
 CREATE TABLE Books (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT AUTO_INCREMENT PRIMARY KEY,  -- Ensure book_id matches the expected column name
     title VARCHAR(255) NOT NULL,
     author_id INT,
     published_year INT,
@@ -25,7 +25,7 @@ CREATE TABLE Books (
 
 -- Create the Customers table
 CREATE TABLE Customers (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,  
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,  -- Ensure customer_id matches the expected column name
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215),
     phone VARCHAR(20),
@@ -34,20 +34,16 @@ CREATE TABLE Customers (
 
 -- Create the Orders table
 CREATE TABLE Orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT AUTO_INCREMENT PRIMARY KEY,  -- Ensure order_id matches the expected column name
     customer_id INT,
     order_date DATE NOT NULL,
     total_amount DECIMAL(10, 2),
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
 );
 
--- Create the Order_Details table with the expected data types and foreign key references
+-- Create the Order_Details table with correct foreign key references and quantity type
 CREATE TABLE Order_Details (
     order_id INT,
     book_id INT,
-    quantity DOUBLE,  -- Adjusted from INT to DOUBLE
-    price DECIMAL(10, 2),
-    PRIMARY KEY (order_id, book_id),
-    FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE
-);
+    quantity DOUBLE,  -- Ensure quantity is set as DOUBLE
+    price DECIMAL(10, 2
