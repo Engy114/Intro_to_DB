@@ -41,9 +41,13 @@ CREATE TABLE Orders (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
 );
 
--- Create the Order_Details table with correct foreign key references and quantity type
+-- Create the Order_Details table with exact foreign key references
 CREATE TABLE Order_Details (
     order_id INT,
     book_id INT,
-    quantity DOUBLE,  -- Ensure quantity is set as DOUBLE
-    price DECIMAL(10, 2
+    quantity DOUBLE,  -- Adjusted to DOUBLE
+    price DECIMAL(10, 2),
+    PRIMARY KEY (order_id, book_id),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),  -- Exact foreign key reference
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)      -- Exact foreign key reference
+);
