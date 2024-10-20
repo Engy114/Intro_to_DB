@@ -26,11 +26,10 @@ CREATE TABLE Books (
 -- Create the Customers table
 CREATE TABLE Customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
+    customer_name VARCHAR(215) NOT NULL,
+    email VARCHAR(215),
     phone VARCHAR(20),
-    address VARCHAR(255)
+    address TEXT
 );
 
 -- Create the Orders table
@@ -49,6 +48,4 @@ CREATE TABLE Order_Details (
     quantity INT,
     price DECIMAL(10, 2),
     PRIMARY KEY (order_id, book_id),
-    FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE
-);
+    FOREIGN KEY (orde
