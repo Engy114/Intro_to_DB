@@ -1,7 +1,14 @@
--- Create the authors table with author_name
+-- Drop tables if they exist to avoid duplication errors
+DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS authors;
+
+-- Create the authors table
 CREATE TABLE authors (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    author_name VARCHAR(200) NOT NULL,  -- Add a single author_name field
+    author_name VARCHAR(200) NOT NULL,
     date_of_birth DATE
 );
 
@@ -13,7 +20,7 @@ CREATE TABLE books (
     published_year INT,
     price DECIMAL(10, 2),
     stock_quantity INT,
-    FOREIGN KEY (author_id) REFERENCES authors(id)
+    FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
 );
 
 -- Create the customers table
@@ -32,7 +39,7 @@ CREATE TABLE orders (
     customer_id INT,
     order_date DATE NOT NULL,
     total_amount DECIMAL(10, 2),
-    FOREIGN KEY (customer_id) REFERENCES customers(id)
+    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
 );
 
 -- Create the order_details table
@@ -42,6 +49,6 @@ CREATE TABLE order_details (
     quantity INT,
     price DECIMAL(10, 2),
     PRIMARY KEY (order_id, book_id),
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (book_id) REFERENCES books(id)
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );
