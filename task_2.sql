@@ -25,7 +25,7 @@ CREATE TABLE Books (
 
 -- Create the Customers table
 CREATE TABLE Customers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,  -- Changed 'id' to 'customer_id'
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215),
     phone VARCHAR(20),
@@ -38,7 +38,7 @@ CREATE TABLE Orders (
     customer_id INT,
     order_date DATE NOT NULL,
     total_amount DECIMAL(10, 2),
-    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE  -- Adjusted reference
 );
 
 -- Create the Order_Details table
@@ -48,4 +48,6 @@ CREATE TABLE Order_Details (
     quantity INT,
     price DECIMAL(10, 2),
     PRIMARY KEY (order_id, book_id),
-    FOREIGN KEY (orde
+    FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE
+);
