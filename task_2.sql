@@ -1,3 +1,10 @@
+-- Create the authors table with author_name
+CREATE TABLE authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    author_name VARCHAR(200) NOT NULL,  -- Add a single author_name field
+    date_of_birth DATE
+);
+
 -- Create the books table
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -7,14 +14,6 @@ CREATE TABLE books (
     price DECIMAL(10, 2),
     stock_quantity INT,
     FOREIGN KEY (author_id) REFERENCES authors(id)
-);
-
--- Create the authors table
-CREATE TABLE authors (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    date_of_birth DATE
 );
 
 -- Create the customers table
@@ -46,4 +45,3 @@ CREATE TABLE order_details (
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
-
